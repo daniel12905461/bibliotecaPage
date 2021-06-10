@@ -1,0 +1,64 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h4 class="font-weight-bold">Lista de Categorias</h4>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Simple Tables</li> -->
+          <button class="btn btn-md text-white btn-dark" (click)="create()">
+            <i class="fa fa-plus-square mr-2"></i>Nuevo Categorias
+          </button>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body table-responsive p-0" style="max-height: 100vh !important;">
+            <table class="table table-head-fixed text-nowrap">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Activo</th>
+                  <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let categoria of categorias; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ categoria.nombre }}</td>
+                  <td>{{ categoria.codigo }}</td>
+                  <td>
+                    <app-switch [id]="categoria.id" [estado]="categoria.enabled" (clickEnable)="enable(categoria.id)"></app-switch>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn" (click)="edit(categoria.id)">
+                        <i class="fas fa-pencil-alt text-warning"></i>
+                      </button>
+                      <button type="button" class="btn" (click)="eliminar(categoria.id)">
+                        <i class="fas fa-trash-alt text-danger"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+</section>

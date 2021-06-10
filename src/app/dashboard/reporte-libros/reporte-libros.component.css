@@ -1,0 +1,5 @@
+.libroCard:hover{
+  /*  transform: scale(1.04);*/
+  cursor: pointer;
+  box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.467);
+}

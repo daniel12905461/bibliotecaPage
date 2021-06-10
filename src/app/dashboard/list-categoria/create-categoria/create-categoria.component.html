@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <p class="modal-title h4 font-weight-bold">{{ title }}</p>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form
+  action=""
+  [formGroup]="categoriaForm"
+  (ngSubmit)="register(categoriaForm.value)"
+  class="form-horizontal form-material"
+  id="empleadoform"
+  novalidate
+>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            class="form-control form-control-sm"
+            type="text" id="nombre"
+            formControlName="nombre"
+            placeholder="Nombre"
+            [ngClass]="{'is-invalid': categoriaForm.get('nombre').touched && categoriaForm.get('nombre').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Nombre es requerido</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="codigo">Codigo</label>
+          <input
+            class="form-control form-control-sm"
+            type="text" id="codigo"
+            formControlName="codigo"
+            placeholder="Codigo"
+            [ngClass]="{'is-invalid': categoriaForm.get('codigo').touched && categoriaForm.get('codigo').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Codigo es requerido</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-default" (click)="activeModal.close('Close click')">
+      Cerrar
+    </button>
+    <button class="btn btn-info" [disabled]="categoriaForm.invalid || isLoading">
+      Guardar
+    </button>
+  </div>
+</form>

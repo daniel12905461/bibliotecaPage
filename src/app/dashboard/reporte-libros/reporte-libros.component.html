@@ -1,0 +1,142 @@
+<section class="content-header" style="padding: 10px; padding-bottom: 0px;">
+  <div class="container-fluid">
+    <!-- <div class="row mb-2">
+      <div class="col-sm-6">
+        <h4 class="font-weight-bold">Libros</h4>
+      </div>
+      <div class="col-sm-6">
+      </div>
+    </div> -->
+    <form
+      action=""
+      [formGroup]="formGroup"
+    >
+    <div class="row">
+      <div class="col-sm-5">
+        <label for="titulo">Titulo</label>
+        <input
+          class="form-control form-control-sm"
+          type="text" id="titulo"
+          formControlName="titulo"
+          placeholder="Titulo"/>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="">Autor</label>
+          <select
+            class="form-control form-control-sm"
+            formControlName="autor_id">
+            <option [ngValue]="''" [defaultSelected]="true">Todos</option>
+            <option *ngFor="let autor of autores" value="{{ autor.id }}">{{ autor.nombre }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="">Categoria</label>
+          <select
+            class="form-control form-control-sm"
+            formControlName="categoria_id">
+            <option [ngValue]="''" [defaultSelected]="true">Todos</option>
+            <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; width: 7rem;">
+        <p class="font-weight-bold h5">Lista de Libros</p>
+      </div>
+      <div class="col-md-9 card-body" style="padding-top: 0px; padding-bottom: 0px;">
+        <div class="row justify-content-end">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-lx-3" *ngFor="let libro of librosReservados; let i = index">
+            <div class="card bg-info" style="padding: 0.3rem;">
+              <div class="row">
+                <div class="col-2">
+                  <img [src]="[url + libro.imagen]" class="img-circle elevation-2" style="height: 2.2rem; width: 2.2rem;">
+                </div>
+                <div class="col-8">
+                  <p class="card-text text-center" style="font-size: 0.9rem !important;"><b>{{ libro.codigo }}</b><br>{{ libro.titulo }}</p>
+                </div>
+                <!-- <div class="col-1 float-right"> -->
+                  <button class="btn btn-sm" (click)="quitarLibroReserba(libro.id)"><i class="fas fa-times"></i></button>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; width: 2rem;" *ngIf="librosReservados.length != 0">
+        <div class="card bg-success" style="padding: 0.4rem;">
+          <button class="btn btn-sm text-white" (click)="registrarPrestamo()">
+            <i class="fas fa-long-arrow-alt-right" style="font-size: 1.5rem !important;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card-body" style="padding-top: 0px; padding-bottom: 0px;">
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-lx-4" *ngFor="let libro of libros; let i = index">
+              <div class="card libroCard" style="max-width: 540px;" (click)="agregarLibroReserba(libro)">
+                <div class="row g-0">
+                  <div
+                    class="col-md-5"
+                  >
+                    <img
+                      [src]="[url + libro.imagen]"
+                      alt="..."
+                      style="height: 190px; width: 100%;"
+                      *ngIf="libro.imagen != 'noImg'"
+                    />
+                    <img
+                      src="assets/images/sinImg.png"
+                      alt="..."
+                      style="height: 190px; width: 100%;"
+                      *ngIf="libro.imagen == 'noImg'"
+                    />
+                  </div>
+                  <div class="col-md-7" style="padding: 5px;">
+                    <div class="card-body" style="padding: 0px 0.6rem 0px 0.6rem;">
+                      <p class="card-text text-center h6">
+                        <b
+                          [ngClass]="{
+                            'btn-success': libro.estado == 0,
+                            'btn-warning': libro.estado == 1
+                          }"
+                          style="border-radius: 7px; padding: 0px 5px;">
+                          {{ libro.codigo }}
+                        </b>
+                      </p>
+                      <h5 class="card-title text-center"><b>{{ libro.titulo }}</b></h5>
+                      <p class="card-text text-left h6">
+                        <b>Autor: </b>{{ libro?.autor?.nombre }}<br>
+                        <b>Edicion: </b>{{ libro.anioEdicion }}<br>
+                        <b>Categoria: </b>{{ libro?.categoria?.nombre }}<br>
+                        <small *ngIf="libro.descripcion != 'null'">{{ libro.descripcion }}</small>
+                      </p>
+                      <p class="card-text text-center">
+                        <a class="btn btn-outline-success btn-sm" [href]="[urlPdf + libro.archivo]" *ngIf="libro.archivo != null" target="_blank">Ver Libro</a>
+                        <!-- &#160;
+                        <a class="btn btn-info btn-sm text-white" (click)="agregarLibroReserba(libro)">Reservar</a> -->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+</section>

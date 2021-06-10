@@ -1,0 +1,72 @@
+<div class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="../../index2.html"><b>Biblio</b>System</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Ingresa tu Correo y Contraseña</p>
+  
+        <form 
+				[formGroup]="loginForm" 
+				(ngSubmit)="onSubmit(loginForm.value)">
+          <div class="input-group mb-3">
+            <input 
+							type="text" 
+							class="form-control" 
+							placeholder="Usuario" 
+							formControlName="user"
+              [ngClass]="{'is-invalid': loginForm.get('user').touched && loginForm.get('user').invalid}"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div class="invalid-feedback">
+              <div>Usuario es requerido</div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input 
+							type="password" 
+							class="form-control" 
+							placeholder="Contraseña"
+							formControlName="password"
+              [ngClass]="{'is-invalid': loginForm.get('password').touched && loginForm.get('password').invalid}"
+						>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            <div class="invalid-feedback">
+              <div>Contraseña es requerido</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <!-- <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div> -->
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
+								<!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+								Ingresar
+							</button>
+            </div>
+            <!-- /.col -->
+          </div>
+
+        </form>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</div>

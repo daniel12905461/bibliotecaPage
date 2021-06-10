@@ -1,0 +1,185 @@
+<div class="modal-header">
+  <p class="modal-title h4 font-weight-bold">{{ title }}</p>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form
+  action=""
+  [formGroup]="libroForm"
+  (ngSubmit)="register(libroForm.value)"
+  #ngForm="ngForm"
+  class="form-horizontal form-material"
+  id="empleadoform"
+  novalidate
+  enctype="multipart/form-data"
+>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Autor</label>
+          <select
+            class="form-control form-control-sm"
+            formControlName="autor_id"
+            [ngClass]="{'is-invalid': libroForm.get('autor_id').touched && libroForm.get('autor_id').invalid}"
+          >
+            <option *ngFor="let autor of autores" value="{{ autor.id }}">{{ autor.nombre }}</option>
+          </select>
+          <div class="invalid-feedback">
+            <div>Autor es requerido</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="titulo">Titulo</label>
+          <input
+            class="form-control form-control-sm"
+            type="text" id="titulo"
+            formControlName="titulo"
+            placeholder="Titulo"
+            [ngClass]="{'is-invalid': libroForm.get('titulo').touched && libroForm.get('titulo').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Titulo es requerido</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="numeroEdicion">Edicion</label>
+          <input
+            class="form-control form-control-sm"
+            type="number" id="numeroEdicion"
+            formControlName="numeroEdicion"
+            placeholder="Edicion"
+            [ngClass]="{'is-invalid': libroForm.get('numeroEdicion').touched && libroForm.get('numeroEdicion').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Edicion es requerido</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="anioEdicion">Año Edicion</label>
+          <input
+            class="form-control form-control-sm"
+            type="number" id="anioEdicion"
+            formControlName="anioEdicion"
+            placeholder="Año Edicion"
+            [ngClass]="{'is-invalid': libroForm.get('anioEdicion').touched && libroForm.get('anioEdicion').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Año Edicion es requerido</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="lugarEdicion">Lugar de Edicion</label>
+          <input
+            class="form-control form-control-sm"
+            type="text" id="lugarEdicion"
+            formControlName="lugarEdicion"
+            placeholder="lugar Edicion"
+            [ngClass]="{'is-invalid': libroForm.get('lugarEdicion').touched && libroForm.get('lugarEdicion').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Lugar de Edicion es requerido</div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="lugarEdicion">Lugar de Edicion</label>
+          <input
+            class="form-control form-control-sm"
+            type="text" id="lugarEdicion"
+            formControlName="lugarEdicion"
+            placeholder="lugar Edicion"
+            [ngClass]="{'is-invalid': libroForm.get('lugarEdicion').touched && libroForm.get('lugarEdicion').invalid}"/>
+          <div class="invalid-feedback">
+            <div>Lugar de Edicion es requerido</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="">Categoria</label>
+          <select
+            class="form-control form-control-sm"
+            formControlName="categoria_id"
+            [ngClass]="{'is-invalid': libroForm.get('categoria_id').touched && libroForm.get('categoria_id').invalid}">
+            <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+          </select>
+          <div class="invalid-feedback">
+            <div>Categoria es requerido</div>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label for="">Coleccion</label>
+          <select
+            class="form-control form-control-sm"
+            formControlName="coleccion_id">
+            <option *ngFor="let colecion of coleciones" value="{{ colecion.id }}">{{ colecion.nombre }}</option>
+          </select>
+        </div> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="numeroLibro">Numero de libro</label>
+          <input class="form-control form-control-sm" type="number" id="numeroLibro" formControlName="numeroLibro" placeholder="Numero de Libro"/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="descripcion">Descripcion</label>
+          <input class="form-control form-control-sm" type="text" id="descripcion" formControlName="descripcion" placeholder="Descripcion"/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="imagen">Imagen</label>
+          <input
+            class="form-control form-control-sm"
+            type="file" id="imagen"
+            formControlName="imagen"
+            placeholder="Imagen"
+            accept="image/*"
+            (change)="cargarImagen($event)"/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="archivo">Subir Libro</label>
+          <input
+            class="form-control form-control-sm"
+            type="file" id="archivo"
+            formControlName="archivo"
+            placeholder="Archivo"
+            (change)="cargarAchivo($event)"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-default" (click)="activeModal.close('Close click')">
+      Cerrar
+    </button>
+    <button class="btn btn-info" [disabled]="libroForm.invalid || isLoading">
+      Guardar
+    </button>
+  </div>
+</form>

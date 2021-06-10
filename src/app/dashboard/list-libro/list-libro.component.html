@@ -1,0 +1,94 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h4 class="font-weight-bold">Lista de Libros</h4>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Simple Tables</li> -->
+          <button class="btn btn-md text-white btn-dark" (click)="create()">
+            <i class="fa fa-plus-square mr-2"></i>Nuevo Libro
+          </button>
+          &#160;
+          <button class="btn btn-md text-white btn-success" (click)="generatePDF()">
+            <i class="fa fa-plus-square mr-2"></i>Generar PDF
+          </button>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body table-responsive p-0" style="max-height: 100vh;">
+            <table class="table table-head-fixed text-nowrap">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Imagen</th>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Autor</th>
+                  <th scope="col">Edicion</th>
+                  <th scope="col">Lugar Edicion</th>
+                  <th scope="col">Año Edicion</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Activo</th>
+                  <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let libro of libros; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>
+                    <img
+                      [src]="[url + libro.imagen]"
+                      class="img-circle elevation-2"
+                      alt="User Image" width="35" height="35"
+                      *ngIf="libro.imagen != 'noImg'"
+                    >
+                    <img
+                      src="assets/images/sinImg.png"
+                      class="img-circle elevation-2"
+                      alt="User Image" width="35" height="35"
+                      *ngIf="libro.imagen == 'noImg'"
+                    >
+                  </td>
+                  <td>{{ libro.codigo }}</td>
+                  <td>{{ libro.titulo }}</td>
+                  <td>{{ libro?.autor?.nombre }}</td>
+                  <td>{{ libro.numeroEdicion }}</td>
+                  <td>{{ libro.lugarEdicion }}</td>
+                  <td>{{ libro.anioEdicion }}</td>
+                  <td *ngIf="libro.descripcion != 'null'">{{ libro.descripcion }}</td>
+                  <td *ngIf="libro.descripcion == 'null'"></td>
+                  <td>
+                    <app-switch [id]="libro.id" [estado]="libro.enabled" (clickEnable)="enable(libro.id)"></app-switch>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn" (click)="edit(libro.id)">
+                        <i class="fas fa-pencil-alt text-warning"></i>
+                      </button>
+                      <button type="button" class="btn" (click)="eliminar(libro.id)">
+                        <i class="fas fa-trash-alt text-danger"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+</section>

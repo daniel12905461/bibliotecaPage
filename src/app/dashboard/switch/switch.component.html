@@ -1,0 +1,11 @@
+
+  <div class="custom-control custom-switch custom-switch-on-success" *ngIf="estado == true">
+    <input type="checkbox" class="custom-control-input" id="{{id}}" (click)="clickEnable.emit(id)" checked="false" >
+    <label class="custom-control-label" for="{{id}}">
+    </label>
+  </div>
+  <div class="custom-control custom-switch custom-switch-on-success" *ngIf="estado == false">
+    <input type="checkbox" class="custom-control-input" id="{{id}}" (click)="clickEnable.emit(id)">
+    <label class="custom-control-label" for="{{id}}">
+    </label>
+  </div>
